@@ -21,13 +21,13 @@ namespace Game1.GUI
         
         public static int _height = 23;
 
-        public void BuildUI(Grid grid)
+        public void BuildUI()
         {
             var _grid = new Grid();
 
-            grid.Widgets.Add(_grid);
+            GUI.grid.Widgets.Add(_grid);
             _grid.Height = _height;
-            _grid.Width = grid.Width;
+            _grid.Width = GUI.grid.Width;
             
 
             _menuFile = new MenuItem();
@@ -82,14 +82,14 @@ namespace Game1.GUI
                     if (textbox.Text.Length > 0)
                     {
                         Map map = new Map(Convert.ToInt32(textbox.Text), GameConfig.graphics, GameConfig.spriteBatch);
-                        grid.Widgets.Remove(panel);
+                        GUI.grid.Widgets.Remove(panel);
                     }
                 };
                 
                 panel.Widgets.Add(label);
                 panel.Widgets.Add(textbox);
                 panel.Widgets.Add(button);
-                grid.Widgets.Add(panel);
+                GUI.grid.Widgets.Add(panel);
                 
             };
 

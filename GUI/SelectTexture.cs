@@ -13,7 +13,7 @@ namespace Game1.GUI
         private DirectoryInfo dir;
         private Image image;
 
-        public void BuildUI(Grid grid)
+        public void BuildUI()
         {
 
             panel = new Panel();
@@ -69,7 +69,7 @@ namespace Game1.GUI
             panel.Widgets.Add(tree);
             panel.Widgets.Add(image);
             panel.Widgets.Add(label);
-            grid.Widgets.Add(panel);
+            GUI.grid.Widgets.Add(panel);
             
 
         }

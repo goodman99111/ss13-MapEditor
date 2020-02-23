@@ -18,6 +18,9 @@ namespace Game1.GUI
         SelectTexture _selectTexture;
         public static int WinWidth;
         public static int WinHeight;
+
+        public static Grid grid = new Grid();
+
         public GUI(GraphicsDeviceManager gr)
         {
             WinWidth = gr.PreferredBackBufferWidth;
@@ -30,14 +33,10 @@ namespace Game1.GUI
 
         public void LoadMenu()
         {
-            var grid = new Grid
-            {
-                RowSpacing = 8,
-                ColumnSpacing = 8
-            };
+            
 
-            _menu.BuildUI(grid);
-            _selectTexture.BuildUI(grid);
+            _menu.BuildUI();
+            _selectTexture.BuildUI();
 
             Desktop.Widgets.Add(grid);
         }

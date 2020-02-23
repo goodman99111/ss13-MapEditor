@@ -9,7 +9,7 @@ namespace Game1.GUI
 {
     class ContextMenu
     {
-        public static Show()
+        public static void Show()
         {
 
         }
