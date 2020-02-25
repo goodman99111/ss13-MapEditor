@@ -90,9 +90,6 @@ namespace Game1
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            
-            Maps.Update();
-
             camera.Update();
 
             base.Update(gameTime);
@@ -109,7 +106,7 @@ namespace Game1
 
             spriteBatch.Begin(transformMatrix: camera.get_transformation(GraphicsDevice));
 
-            Maps.Draw();
+            Map.Draw();
 
 
             //camera.Draw(spriteBatch);
@@ -117,7 +114,8 @@ namespace Game1
 
 
             spriteBatch.End();
-            
+            //UpdateEventMouse();
+            Map.EnteredTile();
             
             
             // TODO: Add your drawing code here

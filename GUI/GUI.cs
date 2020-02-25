@@ -27,11 +27,11 @@ namespace Game1.GUI
             WinHeight = gr.PreferredBackBufferHeight;
             _menu = new MainMenu();
             _selectTexture = new SelectTexture();
-            LoadGUI();
+            LoadMenu();
            
         }
 
-        public void LoadGUI()
+        public void LoadMenu()
         {
             
 

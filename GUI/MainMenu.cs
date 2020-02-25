@@ -1,20 +1,24 @@
-﻿using Game1.Engine;
-using Microsoft.Xna.Framework.Graphics;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Game1.Engine;
+using Microsoft.Xna.Framework;
 using Myra.Graphics2D.TextureAtlases;
 using Myra.Graphics2D.UI;
-using System;
 
 namespace Game1.GUI
 {
-    internal class MainMenu
+    class MainMenu: VerticalStackPanel
     {
-        private System.Windows.Forms.SaveFileDialog SaveFileDialog = new System.Windows.Forms.SaveFileDialog();
+        //public Grid _grid;
         public MenuItem _menuOpenFile;
         public MenuItem _menuSaveFile;
         public MenuItem _menuFile;
         public MenuItem _menuCreateFile;
         public HorizontalMenu _mainMenu;
-
+        
         public static int _height = 23;
 
         public void BuildUI()
@@ -24,7 +28,7 @@ namespace Game1.GUI
             GUI.grid.Widgets.Add(_grid);
             _grid.Height = _height;
             _grid.Width = GUI.grid.Width;
-
+            
 
             _menuFile = new MenuItem();
             _menuFile.Text = "File";
@@ -36,9 +40,6 @@ namespace Game1.GUI
 
             _menuCreateFile = new MenuItem();
             _menuCreateFile.Text = "Создать";
-
-            _menuSaveFile = new MenuItem();
-            _menuSaveFile.Text = "Сохранить";
 
             //GUI c настройками создания карты
             _menuCreateFile.Selected += (e, a) =>
@@ -53,7 +54,7 @@ namespace Game1.GUI
                 var label = new Label();
                 label.Text = "Размеры карты";
                 label.Top = 10;
-                label.Left = (int)(panel.Width / 2 - label.Text.Length / 2 * 9);
+                label.Left = (int)(panel.Width / 2 - label.Text.Length / 2*9);
 
                 var textbox = new TextBox();
                 textbox.Top = label.Top + 30;
@@ -80,40 +81,25 @@ namespace Game1.GUI
                 {
                     if (textbox.Text.Length > 0)
                     {
-                        
                         Map map = new Map(Convert.ToInt32(textbox.Text), GameConfig.graphics, GameConfig.spriteBatch);
-                        Maps.Add(map);
                         GUI.grid.Widgets.Remove(panel);
                     }
                 };
-
+                
                 panel.Widgets.Add(label);
                 panel.Widgets.Add(textbox);
                 panel.Widgets.Add(button);
                 GUI.grid.Widgets.Add(panel);
-
-            };
-            _menuSaveFile.Selected += (e, a) =>
-            {
-                if (SaveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.Cancel)
-                    return;
-                string fileName = SaveFileDialog.FileName;
-
-                int x = 0; 
-                int y = 0;
-                string mapdata = "";
-
-                
                 
             };
+
             _menuFile.Items.Add(_menuCreateFile);
-            _menuFile.Items.Add(_menuSaveFile);
-
+            
             _mainMenu.Items.Add(_menuFile);
             _grid.Widgets.Add(_mainMenu);
         }
 
 
-
+        
     }
 }
