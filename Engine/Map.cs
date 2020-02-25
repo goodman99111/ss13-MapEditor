@@ -1,12 +1,72 @@
 ﻿using Game1.Engine;
+using Game1.GUI;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.Collections.Generic;
 
 namespace Game1
 {
-    internal class Map 
+    class Map
+    {
+        private Tile[,] tiles;
+        GraphicsDevice graphicsDevice;
+        SpriteBatch spriteBatch;
+        MapEvents mapEvents;
+
+        public Map(int _size, GraphicsDevice _graphicsDevice, SpriteBatch _spriteBatch)
+        {
+            tiles = new Tile[_size, _size];
+            graphicsDevice = _graphicsDevice;
+            spriteBatch = _spriteBatch;
+            mapEvents = new MapEvents(this);
+            CreateTiles();
+            
+
+        }
+
+        //Создаём и добавляем тайлы в массив
+        private void CreateTiles()
+        {
+            for (int i = 0; i < tiles.GetLength(0); i++)
+            {
+                for (int k = 0; k < tiles.GetLength(1); k++)
+                {
+                    tiles[i, k] = new Tile(new Vector2(32 * i, 32 * k), graphicsDevice, spriteBatch);
+                }
+            }
+        }
+        //
+        public void Update()
+        {
+            mapEvents.Update();
+        }
+        //Отрисовка каждого тайла на карте
+        public void Draw()
+        {
+            foreach (Tile tile in tiles)
+                tile.Draw();
+        }
+        //Возврат тайла по его ID
+        public Tile GetTileById(int id)
+        {
+            foreach(Tile tile in tiles)
+            {
+                if (tile.Id == id)
+                    return tile;
+            }
+            return null;
+        }
+        public Tile[,] GetAllTiles()
+        {
+            return tiles;
+        }
+        
+
+    }
+    /*
+    internal class Map2 
     {
         public static Tile[,] tiles = new Tile[0, 0]; //Хранилище тайлов
         
@@ -28,7 +88,7 @@ namespace Game1
             }
         }
 
-        public static Vector2 UpdateCamera { get; private set; }
+        
 
         public static void Draw()
         {
@@ -74,9 +134,9 @@ namespace Game1
                         GetTileById(id).isClickDown = true;
                         GetTileById(id).isClickUp = false;
                     }
-                    if (mouseState.LeftButton == ButtonState.Released && !GetTileById(id).isClickDown)
+                    if (mouseState.RightButton == ButtonState.Pressed && !GetTileById(id).isClickDown)
                     {
-                        
+                        //ContextMenu.Show(Map.GetTileById(id));
                     }
                     if (mouseState.LeftButton == ButtonState.Released &&  !GetTileById(id).isClickUp)
                     {
@@ -111,4 +171,5 @@ namespace Game1
 
 
     }
+    */
 }
